@@ -19,7 +19,7 @@ angular.module('photos', ['ngResource'])
     }])
     .factory('PhotosAlbums', ['$resource', function($resource){
         
-        return $resource('http://photos-api.fgascon.com/:albumId.json', {}, {
+        return $resource('/api/:albumId.json', {}, {
             query: {method:'GET', params:{albumId:'list'}, isArray:true}
         });
     }]);
