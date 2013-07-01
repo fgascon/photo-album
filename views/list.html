@@ -1,6 +1,6 @@
 <ul class="thumbnails">
     <li class="span4" ng-repeat="album in albums">
-        <div class="thumbnail">
+        <div class="thumbnail" ng-click="openAlbum(album)">
             <img ng-src="{{getFirstPhoto(album)}}" alt="{{album.name}}">
             <h3>{{album.name}}</h3>
         </div>

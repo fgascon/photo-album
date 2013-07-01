@@ -5,9 +5,13 @@ angular.module('photos', ['ngResource'])
                 templateUrl: 'views/list.html',
                 controller: 'PhotosListCtrl'
             })
+            .when('/:id', {
+                templateUrl: 'views/album.html',
+                controller: 'PhotosAlbumCtrl'
+            })
             .otherwise({redirectTo: '/'});
     }])
-    .controller('PhotosListCtrl', ['$scope', 'PhotosAlbums', function($scope, PhotosAlbums){
+    .controller('PhotosListCtrl', ['$scope', '$location', 'PhotosAlbums', function($scope, $location, PhotosAlbums){
         $scope.albums = PhotosAlbums.query();
         
         $scope.getFirstPhoto = function(album){
@@ -16,6 +20,13 @@ angular.module('photos', ['ngResource'])
             else
                 return null;
         };
+        
+        $scope.openAlbum = function(album){
+            $location.path('/'+album.id);
+        };
+    }])
+    .controller('PhotosAlbumCtrl', ['$scope', '$routeParams', 'PhotosAlbums', function($scope, $routeParams, PhotosAlbums){
+        $scope.album = PhotosAlbums.get($routeParams.id);
     }])
     .factory('PhotosAlbums', ['$resource', function($resource){
         
