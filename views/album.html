@@ -1,1 +1,9 @@
 <h1>{{album.name}}</h1>
+
+<ul class="thumbnails">
+    <li class="span4" ng-repeat="photo in album.photos">
+        <a class="thumbnail">
+            <img ng-src="{{photo.url}}" alt="">
+        </a>
+    </li>
+</ul>
