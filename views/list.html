@@ -1,17 +1,8 @@
 <ul class="thumbnails">
-    <li class="span4">
-        <a href="#" class="thumbnail">
-            <img src="http://placehold.it/300x200" alt="">
-        </a>
-    </li>
-    <li class="span4">
-        <a href="#" class="thumbnail">
-            <img src="http://placehold.it/300x200" alt="">
-        </a>
-    </li>
-    <li class="span4">
-        <a href="#" class="thumbnail">
-            <img src="http://placehold.it/300x200" alt="">
-        </a>
+    <li class="span4" ng-repeat="album in albums">
+        <div class="thumbnail">
+            <img ng-src="getFirstPhoto(album)" alt="{{album.name}}">
+            <h3>{{album.name}}</h3>
+        </div>
     </li>
 </ul>

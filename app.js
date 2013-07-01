@@ -1,4 +1,4 @@
-angular.module('photos', [])
+angular.module('photos', ['ngResource'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {
@@ -8,13 +8,18 @@ angular.module('photos', [])
             .otherwise({redirectTo: '/'});
     }])
     .controller('PhotosListCtrl', ['$scope', 'PhotosAlbums', function($scope, PhotosAlbums){
-        $scope.albums = PhotosAlbums.list();
-    }])
-    .factory('PhotosAlbums', [function(){
+        $scope.albums = PhotosAlbums.query();
         
-        return {
-            list: function(){
-                return [];
-            }
+        $scope.getFirstPhoto = function(album){
+            if(album && album.photos && album.photos[0] && album.photos[0].url)
+                return album.photos[0].url;
+            else
+                return null;
         };
+    }])
+    .factory('PhotosAlbums', ['$resource', function($resource){
+        
+        return $resource('http://photos-api.fgascon.com/:albumId.json', {}, {
+            query: {method:'GET', params:{albumId:'list'}, isArray:true}
+        });
     }]);
