@@ -26,7 +26,7 @@ angular.module('photos', ['ngResource'])
         };
     }])
     .controller('PhotosAlbumCtrl', ['$scope', '$routeParams', 'PhotosAlbums', function($scope, $routeParams, PhotosAlbums){
-        $scope.album = PhotosAlbums.get({id: $routeParams.id});
+        $scope.album = PhotosAlbums.get({albumId: $routeParams.id});
     }])
     .factory('PhotosAlbums', ['$resource', function($resource){
         
